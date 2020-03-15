@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import AppContainer from './Component/App/AppContainer';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducer';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// 스토어 생성
+let store = createStore(reducer);
+// 스토어에서 state 값 가져오기
+// console.log(store.getState());
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>,
+  document.getElementById('root')
+);
